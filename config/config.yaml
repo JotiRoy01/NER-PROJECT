@@ -1,0 +1,8 @@
+data_ingestion:
+  url: ""
+  
+artifacts:
+  raw_data: zipdata
+  data: data
+  train: train
+  test: test
