@@ -1,5 +1,42 @@
+#loggin informaion
+loggers:
+  version: 1
+  disable_existing_loggers: false
+
+  formatters:
+    json:
+      (): pythonjsonlogger.jsonlogger.JsonFormatter
+      format: '%(asctime)s %(levelname)s %(name)s %(message)s'
+
+  handlers:
+    console:
+      class: logging.StreamHandler
+      level: DEBUG
+      formatter: json
+      stream: ext://sys.stdout
+
+    file:
+      class: logging.FileHandler
+      level: ERROR
+      formatter: json
+      filename: ner_exception.log
+      mode: a
+
+  loggers:
+    ner_logger:
+      level: DEBUG
+      handlers: [console, file]
+      propagate: no
+
+  root:
+    level: WARNING
+    handlers: [console]
+
+#Project parameter infomation
+
 data_ingestion:
   url: ""
+  
   
 artifacts:
   raw_data: zipdata
