@@ -3,8 +3,8 @@ disable_existing_loggers: false
 
 formatters:
   json:
-    (): pythonjsonlogger.jsonlogger.JsonFormatter
-    format: '%(asctime)s %(levelname)s %(name)s %(message)s'
+    class: pythonjsonlogger.jsonlogger.JsonFormatter
+    format: '%(asctime)s %(levelname)s %(name)s %(message)s %(custom)s'
 
 handlers:
   console:
@@ -17,11 +17,11 @@ handlers:
     class: logging.FileHandler
     level: ERROR
     formatter: json
-    filename: housing_exception.log
+    filename: ner_exception.log
     mode: a
 
 loggers:
-  housing_logger:
+  Ner_logger:
     level: DEBUG
     handlers: [console, file]
     propagate: no

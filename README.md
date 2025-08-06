@@ -4,3 +4,6 @@ here, I build a name entity recognition project. it's a production or industry l
 ```bash
 touch init_setup.sh
 ```
+```bash
+class: pythonjsonlogger.jsonlogger.JsonFormatter
+```
