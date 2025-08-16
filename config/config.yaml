@@ -1,12 +1,15 @@
 #Project parameter infomation
 
+
+
 data_ingestion:
   url: ""
-  
-  
-  
-artifacts:
+  artifacts: Artifacts
+  data_ingestion: DataIngestion
   raw_data: zipdata
   data: data
+
+data_transformation:
+  data_transformation: DataTransformation
   train: train
   test: test

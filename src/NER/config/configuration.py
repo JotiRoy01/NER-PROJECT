@@ -16,5 +16,7 @@ class Configuraion() :
     def data_ingestion(self) ->DataIngestion :
         self.data_ingestion =  self.config_file_path[DATA_INGESTION]
         self.data_url = self.data_ingestion[URL]
-        
+        return DataIngestion(
+            url=self.data_url
+        )
     
