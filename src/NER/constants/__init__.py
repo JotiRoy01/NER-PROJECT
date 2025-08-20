@@ -5,3 +5,4 @@ CONFIG_FILE_PATH = "/config/config.yaml"
 DATA_INGESTION = "data_ingestion"
 URL = "url"
 ROOT_DIR = os.getcwd()
+ARTIFACTS_DIR = "artifacts_dir"

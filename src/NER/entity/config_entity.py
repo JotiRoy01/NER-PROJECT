@@ -4,6 +4,7 @@ import sys
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Optional
+from src.NER.config.configuration import Configuraion
 
 class DataIngestion() :
     def __init__(self,url)->str:
@@ -12,9 +13,9 @@ class DataIngestion() :
     
 
 class Artifact():
-    def __init__(self,artifact:str) ->str :
-        self.artifact = artifact
-        return artifact
+    def __init__(self) ->str :
+        self.artifact = Configuraion.artifact_dir()
+        return self.artifact
 
 @dataclass
 class Experiment:

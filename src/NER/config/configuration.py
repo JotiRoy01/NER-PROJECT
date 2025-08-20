@@ -1,6 +1,6 @@
-from src.NER.constants import URL, DATA_INGESTION
+#from src.NER.constants import URL, DATA_INGESTION
 from src.NER.exception import NerException
-from src.NER.entity.config_entity import DataIngestion
+from src.NER.entity.config_entity import DataIngestion, Artifact
 from src.NER.constants import *
 from src.NER.utils.util import read_yaml_file
 import sys
@@ -19,4 +19,8 @@ class Configuraion() :
         return DataIngestion(
             url=self.data_url
         )
-    
+    def artifact_dir(self) -> Artifact :
+        self.config_file_path[DATA_INGESTION]
+        self.root_dir = ROOT_DIR
+        self.artifact_dir = os.path.join(self.root_dir, self.config_file_path[DATA_INGESTION][ARTIFACTS_DIR])
+        return Artifact(artifact=self.artifact_dir)
