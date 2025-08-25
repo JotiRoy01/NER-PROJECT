@@ -1,21 +1,20 @@
-from src.NER.logger import logging
-from src.NER.exception import NerException
+from NER.logger import logging
+from NER.exception import NerException
 import sys
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Optional
-from src.NER.config.configuration import Configuraion
+from NER.config.configuration import Configuration
 
 class DataIngestion() :
     def __init__(self,url)->str:
         self.url = ""
-        return url
+        
     
 
 class Artifact():
-    def __init__(self) ->str :
-        self.artifact = Configuraion.artifact_dir()
-        return self.artifact
+    def __init__(self) :
+        self.artifact = Configuration().artifact_dir()
 
 @dataclass
 class Experiment:
