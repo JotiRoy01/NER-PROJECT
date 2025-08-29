@@ -9,7 +9,7 @@ class Configuration() :
     def __init__(self, config_file_path:str = CONFIG_FILE_PATH)->None:
         try :
             self.config_file_path = read_yaml_file(file_path=config_file_path)
-            self.con
+            self.artifact_dir_path = self.artifact_dir()
         except Exception as e:
             raise NerException(e,sys) from e
     
@@ -22,5 +22,6 @@ class Configuration() :
     def artifact_dir(self) -> Artifact :
         self.config_file_path[DATA_INGESTION]
         self.root_dir = ROOT_DIR
-        self.artifact_dir = os.path.join(self.root_dir, self.config_file_path[DATA_INGESTION][ARTIFACTS_DIR])
-        return Artifact(artifact=self.artifact_dir)
+        artifact_dir = os.path.join(self.root_dir, self.config_file_path[DATA_INGESTION][ARTIFACTS_DIR])
+        artifact_dir_path = Artifact(artifact=artifact_dir)
+        return artifact_dir_path

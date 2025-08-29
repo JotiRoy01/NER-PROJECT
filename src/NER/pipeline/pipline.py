@@ -13,11 +13,18 @@ import pandas as pd
 class Pipeline(Thread) :
     experiment: Experiment = Experiment()
     experiment_file_path = None
-
+    
     def __init__(self, config:Configuration) ->None :
-        self.config = Configuration()
-        super().__init__()
+        try :
+            os.makedirs(config.artifact_dir, exist_ok=True)
+            Pipeline.experiment_file_path = os.path.join(config.artifact_dir,EXPERIMENT_DIR_NAME,EXPERIMENT_FILE_NAME)
+            super().__init__(daemon=False, name="Pipeline")
+            self.config = config
+        except Exception as e :
+            raise NerException(e,sys) from e
     
     def run(self) :
+
+
 
         pass

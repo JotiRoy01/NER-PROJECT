@@ -1,27 +1,28 @@
-from NER.logger import logging
-from NER.exception import NerException
+from src.NER.logger import logging
+from src.NER.exception import NerException
 import sys
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Optional
-from NER.config.configuration import Configuration
+from src.NER.constants import *
+#from src.NER.config.configuration import Configuration
 
 class DataIngestion() :
-    def __init__(self,url)->str:
-        self.url = ""
+    def __init__(self,url:str = None)->str:
+        self.url = url
         
     
 
 class Artifact():
-    def __init__(self) :
-        self.artifact = Configuration().artifact_dir()
+    def __init__(self,artifact:str = None) :
+        self.artifact = artifact
 
 @dataclass
 class Experiment:
-    experiment_id: str
-    initialization_timestamp: datetime
-    artifact_time_stamp: datetime
-    running_status: str
+    experiment_id: str = None
+    initialization_timestamp: datetime = None
+    artifact_time_stamp: datetime = None
+    running_status: str = None
     start_time: Optional[datetime] = None
     stop_time: Optional[datetime] = None
     execution_time: Optional[float] = None

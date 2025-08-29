@@ -6,3 +6,7 @@ DATA_INGESTION = "data_ingestion"
 URL = "url"
 ROOT_DIR = os.getcwd()
 ARTIFACTS_DIR = "artifacts_dir"
+
+#Experiment
+EXPERIMENT_DIR_NAME="experiment"
+EXPERIMENT_FILE_NAME="experiment.csv"

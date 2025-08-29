@@ -3,7 +3,7 @@
 
 
 data_ingestion:
-  url: ""
+  url: "huggingface/dataset"
   artifacts_dir: Artifacts
   data_ingestion: DataIngestion
   raw_data: zipdata
