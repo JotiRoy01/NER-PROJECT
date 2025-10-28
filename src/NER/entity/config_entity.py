@@ -7,15 +7,24 @@ from typing import Optional
 from src.NER.constants import *
 #from src.NER.config.configuration import Configuration
 
-class DataIngestion() :
-    def __init__(self,url:str = None)->str:
+class DataIngestion :
+    def __init__(self,url:str = None):
         self.url = url
         
     
 
-class Artifact():
+class Artifact :
     def __init__(self,artifact:str = None) :
         self.artifact = artifact
+        #print(self.artifact)
+        #print("my name is joit")
+
+class DataLoaderArtifacts :
+        def __init__(self, data_loader_artifacts:str = None) :
+            self.data_loader_artifacts = data_loader_artifacts
+        
+        #data_loader_artifacts = self.data_loader_artifacts
+            #print(self.data_loader_artifacts)
 
 @dataclass
 class Experiment:

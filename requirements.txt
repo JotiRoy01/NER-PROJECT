@@ -1,5 +1,7 @@
 python-json-logger
-pyyaml
 ipykernel
 pandas
 numpy
+datasets
+torch
+transformers

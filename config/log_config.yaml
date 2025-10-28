@@ -15,7 +15,7 @@ handlers:
 
   file:
     class: logging.FileHandler
-    level: ERROR
+    level: DEBUG
     formatter: json
     filename: ner_exception.log
     mode: a
