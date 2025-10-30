@@ -36,7 +36,8 @@ class Pipeline(Thread) :
     
     
     def start_data_ingestion(self) :
-        prepare_bc5cdr_dataset(data_artifacts = self.config.data_loader_artifacts())
+        raw_dir = "Artifacts\\data\\bc5cdr\\CDR_Data"
+        prepare_bc5cdr_dataset(raw_dir=raw_dir, out_dir=self.config.data_loader_artifacts().data_loader_artifacts)
 
     # def run(self) :
     #     try :

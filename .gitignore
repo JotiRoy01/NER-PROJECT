@@ -175,3 +175,4 @@ cython_debug/
 env_NER/
 .idea/
 .vscode/
+Artifacts/data/
