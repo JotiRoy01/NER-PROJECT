@@ -7,6 +7,7 @@ from src.NER.exception import NerException, logger
 from src.NER.config.configuration import Configuration
 from src.NER.entity.config_entity import Experiment, DataLoaderArtifacts, Artifact
 from src.NER.components.data_loader import prepare_bc5cdr_dataset
+from src.NER.components.data_validation import check_validation
 from threading import Thread
 from multiprocessing import Process
 from typing import List
@@ -27,6 +28,7 @@ class Pipeline(Thread) :
             print(Pipeline.experiment_file_path )
             logger.info(f"experiment file path is created at {Pipeline.experiment_file_path}")
             #config.data_loader_artifacts()
+            config.dataset_tsv_dir()
             
             super().__init__(daemon=False, name="Pipeline")
             self.config = config
@@ -35,10 +37,13 @@ class Pipeline(Thread) :
         
     
     
-    def start_data_ingestion(self) :
-        raw_dir = "Artifacts\\data\\bc5cdr\\CDR_Data"
-        prepare_bc5cdr_dataset(raw_dir=raw_dir, out_dir=self.config.data_loader_artifacts().data_loader_artifacts)
+    # def start_data_ingestion(self) :
+    #     raw_dir = "Artifacts\\data\\bc5cdr\\CDR_Data"
+    #     prepare_bc5cdr_dataset(raw_dir=raw_dir, out_dir=self.config.data_loader_artifacts().data_loader_artifacts)
 
+    # def data_validation(self):
+    #     data_dir = "Artifacts\\data"
+    #     check_validation(data_dir)
     # def run(self) :
     #     try :
     #         self.run_pipeline()

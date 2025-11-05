@@ -26,6 +26,14 @@ class DataLoaderArtifacts :
         #data_loader_artifacts = self.data_loader_artifacts
             #print(self.data_loader_artifacts)
 
+
+class Dataset_dir :
+    def __init__(self, train_path_tsv:str = None, test_path_tsv:str = None, dev_path_tsv:str = None, max_lenght:int = None) :
+        self.train_path_tsv = train_path_tsv
+        self.test_path_tsv = test_path_tsv
+        self.dev_path_tsv = dev_path_tsv
+        self.max_lenght = max_lenght
+        print(self.train_path_tsv)
 @dataclass
 class Experiment:
     experiment_id: str = None

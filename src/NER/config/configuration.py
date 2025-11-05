@@ -1,6 +1,6 @@
 #from src.NER.constants import URL, DATA_INGESTION
 from src.NER.exception import NerException
-from src.NER.entity.config_entity import DataIngestion, Artifact, DataLoaderArtifacts
+from src.NER.entity.config_entity import DataIngestion, Artifact, DataLoaderArtifacts, Dataset_dir
 from src.NER.constants import *
 from src.NER.utils.util import read_yaml_file
 import sys
@@ -26,6 +26,18 @@ class Configuration() :
         artifact_dir = os.path.join(self.root_dir, self.config_file_path[DATA_INGESTION][ARTIFACTS_DIR])
         artifact_dir_path = Artifact(artifact=artifact_dir)
         return artifact_dir_path
+    
+    def dataset_tsv_dir(self) -> Dataset_dir : 
+        self.train_path_tsv = os.path.join(self.artifact_dir_path.artifact, self.config_file_path[DATASET][TRAIN_PATH])
+        self.test_path_tsv = os.path.join(self.artifact_dir_path.artifact, self.config_file_path[DATASET][TEST_PATH])
+        self.dev_path_tsv = os.path.join(self.artifact_dir_path.artifact, self.config_file_path[DATASET][DEV_PATH])
+        self.max_lenght = 128
+
+        tsv_dataset_dir = Dataset_dir(self.train_path_tsv, self.test_path_tsv, self.dev_path_tsv, self.max_lenght)
+        return tsv_dataset_dir
+
+
+
     def data_loader_artifacts(self) -> DataLoaderArtifacts :
         # self.root_dir = ROOT_DIR
         # artifact_dir = os.path.join(self.root_dir, self.config_file_path[DATA_INGESTION][ARTIFACTS_DIR])

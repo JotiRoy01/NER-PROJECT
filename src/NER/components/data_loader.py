@@ -4,6 +4,7 @@ from datasets import load_dataset
 from src.NER.utils.util import *
 from src.NER.entity.config_entity import *
 from src.NER.config.configuration import *
+from src.NER.components.data_validation import *
 
 import os
 import re
@@ -27,8 +28,8 @@ def read_pubtator_file(file_path: str) -> List[Tuple[str, str]]:
             docs[pmid]["text"] += " " + text
         elif "\t" in line:
             parts = line.strip().split("\t")
-            if len(parts) == 5:
-                pmid, start, end, entity, etype = parts
+            if len(parts) == 6:
+                pmid, start, end, entity, etype, _ = parts
                 docs[pmid]["entities"].append(
                     (int(start), int(end), entity, etype)
                 )
@@ -84,6 +85,8 @@ def prepare_bc5cdr_dataset(raw_dir: str, out_dir: str):
 
         sentences = read_pubtator_file(fpath)
         write_tsv(sentences, os.path.join(out_dir, outname))
+
+        
 
 
 if __name__ == "__main__":

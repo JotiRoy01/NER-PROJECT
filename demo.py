@@ -12,7 +12,9 @@ def main() :
     try :
         config_path = os.path.join("config","config.yaml")
         pipeline = Pipeline(Configuration(config_file_path=config_path))
-        pipeline.start_data_ingestion()
+        # pipeline.start_data_ingestion()
+        # pipeline.data_validation()
+        pipeline
 
     except Exception as e :
         raise NerException(e,sys) from e
