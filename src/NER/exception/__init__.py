@@ -36,8 +36,12 @@ class NerException(Exception):
         #logger.error("Exception occurred", extra={"custom": self.log_data})
 
 
-    def __str__(self):
-        str(self.log_data)
+    # def __str__(self):
+    #     str(self.log_data)
+    # python
+    def __str__(self) -> str:
+        # return the error message (fallback to log_data if not set)
+        return getattr(self, "error_message", str(self.log_data))
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.log_data})"

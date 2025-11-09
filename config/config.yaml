@@ -29,5 +29,5 @@ training:
   batch_size: 16
   epochs: 5
   learning_rate: 5e-5
-  output_dir: Artifacts/biobert_model
+  output_dir: biobert_model
   logging_steps: 50

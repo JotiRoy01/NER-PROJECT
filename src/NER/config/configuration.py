@@ -1,6 +1,6 @@
 #from src.NER.constants import URL, DATA_INGESTION
 from src.NER.exception import NerException
-from src.NER.entity.config_entity import DataIngestion, Artifact, DataLoaderArtifacts, Dataset_dir
+from src.NER.entity.config_entity import DataIngestion, Artifact, DataLoaderArtifacts, Dataset_dir, Model_name, Training
 from src.NER.constants import *
 from src.NER.utils.util import read_yaml_file
 import sys
@@ -35,8 +35,21 @@ class Configuration() :
 
         tsv_dataset_dir = Dataset_dir(self.train_path_tsv, self.test_path_tsv, self.dev_path_tsv, self.max_lenght)
         return tsv_dataset_dir
+    
+    def huggingface_model(self) -> Model_name :
+        self.model_name = self.config_file_path[MODEL][PRETRAINED_MODEL]
+        self.num_labels = self.config_file_path[MODEL][NUM_LABELS]
+        model_name = Model_name(self.model_name, self.num_labels)
+        return model_name
 
-
+    def training_variables(self) -> Training :
+        self.batch_size = self.config_file_path[TRAINING][BATCH_SIZE]
+        self.epochs = self.config_file_path[TRAINING][EPOCHS]
+        self.learning_rate = self.config_file_path[TRAINING][LEARNING_RATE]
+        self.output_dir = os.path.join(self.artifact_dir_path.artifact,self.config_file_path[TRAINING][OUTPUT_DIR])
+        self.logging_steps = self.config_file_path[TRAINING][LOGGING_STEP]
+        train_variables = Training(self.batch_size, self.epochs,self.learning_rate,self.output_dir,self.logging_steps)
+        return train_variables
 
     def data_loader_artifacts(self) -> DataLoaderArtifacts :
         # self.root_dir = ROOT_DIR

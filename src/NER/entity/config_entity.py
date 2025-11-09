@@ -34,6 +34,23 @@ class Dataset_dir :
         self.dev_path_tsv = dev_path_tsv
         self.max_lenght = max_lenght
         print(self.train_path_tsv)
+
+
+class Model_name :
+    def __init__(self, model_name:str=None, num_lables:int=None) :
+        self.model_name = model_name
+        self.num_labels = num_lables
+        print(self.num_labels)
+        print(type(self.num_labels))
+
+class Training :
+    def __init__(self, batch_size:int=None, epochs:int=None,learning_rate:int = None, output_dir:str = None, logging_steps:int=None) :
+        self.batch_size = batch_size
+        self.epochs = epochs
+        self.learning_rate = learning_rate
+        self.output_dir = output_dir
+        self.logging_steps = logging_steps
+        print(output_dir)
 @dataclass
 class Experiment:
     experiment_id: str = None

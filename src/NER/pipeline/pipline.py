@@ -5,9 +5,11 @@ from src.NER.constants import *
 from src.NER.exception import NerException, logger
 
 from src.NER.config.configuration import Configuration
-from src.NER.entity.config_entity import Experiment, DataLoaderArtifacts, Artifact
+from src.NER.entity.config_entity import Experiment, DataLoaderArtifacts, Artifact, Model_name
 from src.NER.components.data_loader import prepare_bc5cdr_dataset
 from src.NER.components.data_validation import check_validation
+from src.NER.components.dataset_builder import NERDataset, build_label_map
+from src.NER.components.train_ner_model import train_bc5cdr
 from threading import Thread
 from multiprocessing import Process
 from typing import List
@@ -28,15 +30,31 @@ class Pipeline(Thread) :
             print(Pipeline.experiment_file_path )
             logger.info(f"experiment file path is created at {Pipeline.experiment_file_path}")
             #config.data_loader_artifacts()
-            config.dataset_tsv_dir()
-            
+            #config.dataset_tsv_dir()
+            #config.huggingface_model()
+            #config.training_variables()
+
             super().__init__(daemon=False, name="Pipeline")
             self.config = config
+            self.start_data_loader()
+            self.start_data_validataion()
+            self.start_train_ner_model()
         except Exception as e :
             raise NerException(e,sys) from e
         
     
-    
+    def start_data_loader(self) :
+        raw_dir = "Artifacts\\data\\bc5cdr\\CDR_Data"
+        prepare_bc5cdr_dataset(raw_dir=raw_dir, out_dir=self.config.data_loader_artifacts().data_loader_artifacts)
+
+
+    def start_data_validataion(self) :
+        check_validation(self.config.data_loader_artifacts().data_loader_artifacts)
+
+    def start_dataset_builder(self) :
+        pass
+    def start_train_ner_model(self) :
+        train_bc5cdr(self.config.huggingface_model(), self.config.dataset_tsv_dir(), self.config.training_variables())
     # def start_data_ingestion(self) :
     #     raw_dir = "Artifacts\\data\\bc5cdr\\CDR_Data"
     #     prepare_bc5cdr_dataset(raw_dir=raw_dir, out_dir=self.config.data_loader_artifacts().data_loader_artifacts)

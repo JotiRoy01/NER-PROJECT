@@ -20,12 +20,14 @@ DEV_PATH = "dev_path"
 MAX_LENGTH = 'max_length'
 
 #model
-PRETRAINED_MODEL = 'dmis-lab/biobert-base-cased-v1.1'
-NUM_LABELS = 3
+MODEL = "model"
+PRETRAINED_MODEL = 'pretrained_model'
+NUM_LABELS = 'num_labels'
 
 #training
-BATCH_SIZE = 16
-EPOCHS = 5
+TRAINING = 'training'
+BATCH_SIZE = 'batch_size'
+EPOCHS = 'epochs'
 LEARNING_RATE = 'learning_rate'
-OUTPUT_DIR = 'Artifacts/biobert_model'
+OUTPUT_DIR = 'output_dir'
 LOGGING_STEP = 'logging_steps'

@@ -176,3 +176,4 @@ env_NER/
 .idea/
 .vscode/
 Artifacts/data/
+Artifacts/biobert_model/

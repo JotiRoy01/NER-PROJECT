@@ -46,3 +46,16 @@ class NERDataset(Dataset):
         label_ids = label_ids[:self.max_length] + [self.label2id["O"]] * (self.max_length - len(label_ids))
         encoding["labels"] = torch.tensor(label_ids)
         return {k: v.squeeze(0) for k, v in encoding.items()}
+
+
+def build_label_map(tsv_file):
+    labels = set()
+    with open(tsv_file, encoding="utf-8") as f:
+        for line in f:
+            if line.strip() == "":
+                continue
+            _, tag = line.strip().split("\t")
+            labels.add(tag)
+    label2id = {label: idx for idx, label in enumerate(sorted(labels))}
+    id2label = {v: k for k, v in label2id.items()}
+    return label2id, id2label
