@@ -5,6 +5,7 @@ from src.NER.utils.util import *
 from src.NER.entity.config_entity import *
 from src.NER.config.configuration import *
 from src.NER.components.data_validation import *
+from src.NER.exception import NerException, logger
 
 import os
 import re
@@ -66,7 +67,7 @@ def write_tsv(sentences: List[Tuple[List[str], List[str]]], out_path: str):
             for t, l in zip(tokens, labels):
                 f.write(f"{t}\t{l}\n")
             f.write("\n")
-    print(f"✅ Saved {out_path} ({len(sentences)} sentences)")
+    logger.info(f" Saved {out_path} ({len(sentences)} sentences)")
 
 
 def prepare_bc5cdr_dataset(raw_dir: str, out_dir: str):
@@ -80,11 +81,13 @@ def prepare_bc5cdr_dataset(raw_dir: str, out_dir: str):
         fpath = os.path.join(raw_dir, "CDR.Corpus.v010516", fname)
         print(f"raw_dir {raw_dir}")
         if not os.path.exists(fpath):
-            print(f"⚠️ Missing {fname}, skipping.")
+            print(f" Missing {fname}, skipping.")
             continue
-
-        sentences = read_pubtator_file(fpath)
-        write_tsv(sentences, os.path.join(out_dir, outname))
+        try :
+            sentences = read_pubtator_file(fpath)
+            write_tsv(sentences, os.path.join(out_dir, outname))
+        except Exception as e :
+            raise NerException(sys, e) from e
 
         
 
@@ -93,7 +96,7 @@ if __name__ == "__main__":
     RAW_DIR = "data/BC5CDR"
     OUT_DIR = "data/bc5cdr_prepared"
     prepare_bc5cdr_dataset(RAW_DIR, OUT_DIR)
-    print("🎯 BC5CDR dataset prepared successfully!")
+    print(" BC5CDR dataset prepared successfully!")
 
 
 

@@ -2,8 +2,8 @@ from transformers import AutoModelForTokenClassification, Trainer, TrainingArgum
 from src.NER.components.dataset_builder import NERDataset, build_label_map
 from src.NER.entity.config_entity import Artifact, DataLoaderArtifacts, Dataset_dir, Model_name, Training
 from src.NER.exception import NerException
-from src.NER.logger.logging import logging
-import os
+from src.NER.logger.logging import logging 
+import os, sys
 
 
 
@@ -49,7 +49,9 @@ def train_bc5cdr(modelname:Model_name, dataset_dir:Dataset_dir, train_info:Train
         eval_dataset= dev_dataset,
         tokenizer = train_dataset.tokenizer
     )
-
-    trainer.train()
-    model.save_pretrained(train_info.output_dir)
-    print(f"model saved to {train_info.output_dir}")
+    try :
+        trainer.train()
+        model.save_pretrained(train_info.output_dir)
+        print(f"model saved to {train_info.output_dir}")
+    except Exception as e :
+        raise NerException(sys, e) from e
