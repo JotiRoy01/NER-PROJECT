@@ -5,3 +5,9 @@ numpy
 datasets
 torch
 transformers
+scikit-learn
+matplotlib
+seaborn
+matplotlib
+seqeval
+tqdm

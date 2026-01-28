@@ -53,5 +53,7 @@ def train_bc5cdr(modelname:Model_name, dataset_dir:Dataset_dir, train_info:Train
         trainer.train()
         model.save_pretrained(train_info.output_dir)
         print(f"model saved to {train_info.output_dir}")
+        metrics = trainer.evaluate()
+        print(metrics)
     except Exception as e :
         raise NerException(sys, e) from e

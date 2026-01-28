@@ -31,3 +31,7 @@ training:
   learning_rate: 5e-5
   output_dir: biobert_model
   logging_steps: 50
+
+trained_model:
+  model_path: biobert_model
+  checkpoint_dir: checkpoint-160

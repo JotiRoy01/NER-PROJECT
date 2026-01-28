@@ -5,11 +5,12 @@ from src.NER.constants import *
 from src.NER.exception import NerException, logger
 
 from src.NER.config.configuration import Configuration
-from src.NER.entity.config_entity import Experiment, DataLoaderArtifacts, Artifact, Model_name
+from src.NER.entity.config_entity import Experiment, DataLoaderArtifacts, Artifact, Model_name, Trained_model
 from src.NER.components.data_loader import prepare_bc5cdr_dataset
 from src.NER.components.data_validation import check_validation
 from src.NER.components.dataset_builder import NERDataset, build_label_map
 from src.NER.components.train_ner_model import train_bc5cdr
+from src.NER.components.evaluate_model import evaluate_model
 from threading import Thread
 from multiprocessing import Process
 from typing import List
@@ -26,6 +27,7 @@ class Pipeline(Thread) :
     def __init__(self, config:Configuration) ->None :
         try :
             os.makedirs(config.artifact_dir().artifact, exist_ok=True)
+            self.config = config
             Pipeline.experiment_file_path = os.path.join(config.artifact_dir().artifact,EXPERIMENT_DIR_NAME,EXPERIMENT_FILE_NAME)
             print(Pipeline.experiment_file_path )
             logger.info(f"experiment file path is created at {Pipeline.experiment_file_path}")
@@ -33,12 +35,15 @@ class Pipeline(Thread) :
             #config.dataset_tsv_dir()
             #config.huggingface_model()
             #config.training_variables()
+            #config.trained_model()
+            
 
             super().__init__(daemon=False, name="Pipeline")
-            self.config = config
-            self.start_data_loader()
-            self.start_data_validataion()
-            self.start_train_ner_model()
+            # self.config = config
+            # self.start_data_loader()
+            # self.start_data_validataion()
+            # self.start_train_ner_model()
+            self.start_model_evaluation()
         except Exception as e :
             raise NerException(e,sys) from e
         
@@ -67,6 +72,12 @@ class Pipeline(Thread) :
     #         self.run_pipeline()
     #     except Exception as e:
     #         raise NerException
-
+    def start_model_evaluation(self) :
+        #evaluate_model(self.config.trained_model().model_path, self.config.dataset_tsv_dir().test_path_tsv)
+        print(f"model path = {self.config.trained_model().model_path}")
+        print(type(self.config.trained_model().model_path))
+        print(f"test path tsv = {self.config.dataset_tsv_dir().test_path_tsv}")
+        print(type(self.config.dataset_tsv_dir().test_path_tsv))
+        evaluate_model(self.config.trained_model().model_path, self.config.dataset_tsv_dir().test_path_tsv)
 
         

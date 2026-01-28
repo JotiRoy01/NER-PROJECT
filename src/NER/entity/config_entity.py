@@ -33,7 +33,7 @@ class Dataset_dir :
         self.test_path_tsv = test_path_tsv
         self.dev_path_tsv = dev_path_tsv
         self.max_lenght = max_lenght
-        print(self.train_path_tsv)
+        #print(self.train_path_tsv)
 
 
 class Model_name :
@@ -51,6 +51,15 @@ class Training :
         self.output_dir = output_dir
         self.logging_steps = logging_steps
         print(output_dir)
+
+class Trained_model :
+    def __init__(self,trained_model:str, model_path:str, checkpoint_dir:str) :
+        self.trained_model = trained_model
+        self.model_path = model_path
+        self.checkpoint_dir = checkpoint_dir
+        print(self.model_path)
+
+        pass
 @dataclass
 class Experiment:
     experiment_id: str = None

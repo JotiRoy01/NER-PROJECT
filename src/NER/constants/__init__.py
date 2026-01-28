@@ -31,3 +31,8 @@ EPOCHS = 'epochs'
 LEARNING_RATE = 'learning_rate'
 OUTPUT_DIR = 'output_dir'
 LOGGING_STEP = 'logging_steps'
+
+#trained model
+TRAINED_MODEL = 'trained_model'
+MODEL_PATH = 'model_path'
+CHECKPOINT_DIR = 'checkpoint_dir'

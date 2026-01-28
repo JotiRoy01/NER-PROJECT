@@ -1,6 +1,6 @@
 #from src.NER.constants import URL, DATA_INGESTION
 from src.NER.exception import NerException
-from src.NER.entity.config_entity import DataIngestion, Artifact, DataLoaderArtifacts, Dataset_dir, Model_name, Training
+from src.NER.entity.config_entity import DataIngestion, Artifact, DataLoaderArtifacts, Dataset_dir, Model_name, Training, Trained_model
 from src.NER.constants import *
 from src.NER.utils.util import read_yaml_file
 import sys
@@ -50,6 +50,14 @@ class Configuration() :
         self.logging_steps = self.config_file_path[TRAINING][LOGGING_STEP]
         train_variables = Training(self.batch_size, self.epochs,self.learning_rate,self.output_dir,self.logging_steps)
         return train_variables
+    
+    def trained_model(self) -> Trained_model :
+        trained_model_name = self.config_file_path[TRAINED_MODEL]
+        trained_model_path = os.path.join(self.artifact_dir_path.artifact, trained_model_name[MODEL_PATH])
+        checkpoint_model_dir = os.path.join(self.artifact_dir_path.artifact, trained_model_name[CHECKPOINT_DIR])
+
+        trained_model_info = Trained_model(trained_model=trained_model_name, model_path=trained_model_path, checkpoint_dir=checkpoint_model_dir)
+        return trained_model_info
 
     def data_loader_artifacts(self) -> DataLoaderArtifacts :
         # self.root_dir = ROOT_DIR
